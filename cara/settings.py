@@ -25,7 +25,7 @@ SECRET_KEY = 'fhxpzl$a)n=%a-mx&8toh!6q17_^tae6kby^qbrx8#m9f%hhag'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["cara-env.spjkiyxypm.us-east-1.elasticbeanstalk.com", "localhost"]
 
 
 # Application definition
@@ -118,3 +118,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
