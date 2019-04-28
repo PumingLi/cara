@@ -16,20 +16,26 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.models import User
-from home.models import Contact
+from home.models import Contact, Options
 from rest_framework import routers, serializers, viewsets
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'is_staff')
+        fields = ('username', 'email', 'is_staff')
 
 # Serializers define the API representation.
 class ContactSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Contact
-        fields = ('url', 'name', 'relationship', 'number')
+        fields = ('name', 'relationship', 'number', 'carrier')
+
+# Serializers define the API representation.
+class OptionsSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Options
+        fields = ('number', 'carrier', 'cheap', 'expensive', 'popular')
 
 # ViewSets define the view behavior.
 class UserViewSet(viewsets.ModelViewSet):
@@ -41,10 +47,16 @@ class ContactViewSet(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
 
+# ViewSets define the view behavior.
+class OptionsViewSet(viewsets.ModelViewSet):
+    queryset = Options.objects.all()
+    serializer_class = OptionsSerializer
+
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register('users', UserViewSet)
 router.register('contacts', ContactViewSet)
+router.register('options', OptionsViewSet)
 
 
 urlpatterns = [

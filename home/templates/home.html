@@ -31,34 +31,30 @@
       <div class="row-eq-height">
 
         <div class="col-md-6" style="position:relative;padding-left:0px;border-right:1px solid rgba(0,0,0,.1);">
-            <div class="row" style="position:relative;">
-              <div class="col-6"><h2>Contacts</h2></div>
-              <div class="col-6"></div>
-            </div>
-            <p style="text-align:justify;text-justify:inter-word;">
-              List of Added Contacts
-
-            </p>
+            <h2>Contacts</h2>
             {% for c in contacts %}
-              <p style="margin:0px;font-size:20px;"><b>{{c.name}}</p>
+              <p style="margin:0px;font-size:20px;">{{c.name}}</p>
               <p>{{c.relationship}}<br>Number: {{c.number}}</p>
             {% endfor %}
+        </div>
+
+        <div class="col-md-6">
+            <h2>Options</h2>
+            <p>Your Phone number: {{options.number}}</p>
+            <p>Your Phone carrier: {{options.carrier}}</p>
+            <p>Threshold for Cheap: {{options.cheap}}</p>
+            <p>Threshold for Expensive: {{options.expensive}}</p>
+            <p>Threshold for Popular: {{options.popular}}</p>
+        </div>
+
+      </div>
+      <div class="row-eq-height">
+        <div class="col-md-6">
             <button type="button" class="btn float-right" data-toggle="modal" data-target=".add-contact" style="background-color:#33001a;color:white;">Add Contact</button>
         </div>
-
-        <div class="col-md-6"">
-            <div class="row" style="position:relative;">
-              <div class="col-6"><h2>Settings</h2></div>
-              <div class="col-6"></div>
-            </div>
-            <p style="text-align:justify;text-justify:inter-word;">
-              <br>
-              <br>
-              <br>
-              <small style="color:lightgrey;">Under Construction</small>
-            </p>
+        <div class="col-md-6">
+            <button type="button" class="btn float-right" data-toggle="modal" data-target=".add-options" style="background-color:#33001a;color:white;">Edit Options</button>
         </div>
-
       </div>
       <br>
       <div style="height:20%;"></div>
@@ -88,6 +84,53 @@
               <div class="form-group">
                 <label for="id_contact_number">Number</label>
                 {% render_field contact_form.contact_number class+="form-control"|append_attr:"readonly:readonly" placeholder="(800)-500-7400" %}
+              </div>
+              <div class="form-group">
+                <label for="id_contact_carrier">Type</label>
+                {% render_field contact_form.contact_carrier class+="custom-select" %}
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade add-options" tabindex="-1" role="dialog" aria-labelledby="exerciseModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <form action="{% url 'add_options' %}" method="post" autocomplete="off">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Edit Options</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="id_options_number">Your Number</label>
+                {% render_field options_form.options_number class+="form-control"|append_attr:"readonly:readonly" placeholder="(800)-500-7400" %}
+              </div>
+              <div class="form-group">
+                <label for="id_options_carrier">Phone Carrier</label>
+                {% render_field options_form.options_carrier class+="custom-select" %}
+              </div>
+              <div class="form-group">
+                <label for="id_options_cheap">Cheap Threshold</label>
+                {% render_field options_form.options_cheap class+="form-control"|append_attr:"readonly:readonly" placeholder="2" %}
+              </div>
+              <div class="form-group">
+                <label for="id_options_expensive">Expensive Threshold</label>
+                {% render_field options_form.options_expensive class+="form-control"|append_attr:"readonly:readonly" placeholder="4" %}
+              </div>
+              <div class="form-group">
+                <label for="id_options_popular">Popular Threshold</label>
+                {% render_field options_form.options_popular class+="form-control"|append_attr:"readonly:readonly" placeholder="4" %}
               </div>
             </div>
             <div class="modal-footer">
