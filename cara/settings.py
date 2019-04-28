@@ -136,15 +136,15 @@ REST_FRAMEWORK = {
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
-# django_heroku.settings(locals())
-# DATABASES = {}
-# DATABASES['default'] = dj_database_url.config(conn_max_age=600)
-#
-# dotenv_file = os.path.join(BASE_DIR, ".env")
-# if os.path.isfile(dotenv_file):
-#     dotenv.load_dotenv(dotenv_file)
-#
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-#
-# if 'OPTIONS' in DATABASES['default']:
-#     del DATABASES['default']['OPTIONS']['sslmode']
+django_heroku.settings(locals())
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+if 'OPTIONS' in DATABASES['default']:
+    del DATABASES['default']['OPTIONS']['sslmode']
