@@ -12,6 +12,7 @@ django-bootstrap4==0.0.8
 django-heroku==0.3.1
 django-jquery==3.1.0
 django-widget-tweaks==1.4.3
+djangorestframework==3.9.2
 docker==3.7.2
 docker-compose==1.23.2
 docker-pycreds==0.4.0
